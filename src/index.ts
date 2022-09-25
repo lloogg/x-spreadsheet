@@ -8,7 +8,15 @@ import { locale } from './locale/locale';
 import './index.less';
 
 
-class Spreadsheet {
+export class Spreadsheet {
+  options: {
+    mode?: string; showBottomBar: boolean; 
+};
+  sheetIndex: number;
+  datas: any[];
+  bottombar: Bottombar;
+  sheet: Sheet;
+  data: DataProxy;
   constructor(selectors, options = {}) {
     let targetEl = selectors;
     this.options = { showBottomBar: true, ...options };
@@ -41,7 +49,7 @@ class Spreadsheet {
     }
   }
 
-  addSheet(name, active = true) {
+  addSheet(name?, active = true) {
     const n = name || `sheet${this.sheetIndex}`;
     const d = new DataProxy(n, this.options);
     d.change = (...args) => {

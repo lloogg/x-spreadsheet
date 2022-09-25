@@ -1,10 +1,10 @@
-const merge = require('webpack-merge');
 const common = require('./webpack.config.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = merge(common, {
+module.exports = {
+  ...common,
   mode: 'development',
   plugins: [
     new CleanWebpackPlugin(['dist']),
@@ -12,6 +12,7 @@ module.exports = merge(common, {
     new HtmlWebpackPlugin({
       template: './index.html',
       title: 'x-spreadsheet',
+      chunks: ["demo"]
     }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
@@ -26,6 +27,7 @@ module.exports = merge(common, {
   devtool: 'inline-source-map',
   devServer: {
     host: 'localhost',
-    contentBase: '../dist',
+    static: '../dist',
+    host: '0.0.0.0'
   },
-});
+};
