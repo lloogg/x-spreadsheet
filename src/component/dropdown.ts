@@ -3,6 +3,11 @@ import { bindClickoutside, unbindClickoutside } from './event';
 import { cssPrefix } from '../config';
 
 export default class Dropdown extends Element {
+  title: any;
+  change: () => void;
+  headerClick: () => void;
+  contentEl: any;
+  headerEl: any;
   constructor(title, width, showArrow, placement, ...children) {
     super('div', `${cssPrefix}-dropdown ${placement}`);
     this.title = title;
@@ -34,6 +39,10 @@ export default class Dropdown extends Element {
     );
     this.children(this.headerEl, this.contentEl);
   }
+  children(headerEl: any, contentEl: any) {
+    // throw new Error('Method not implemented.');
+    return this;
+  }
 
   setContentChildren(...children) {
     this.contentEl.html('');
@@ -50,15 +59,21 @@ export default class Dropdown extends Element {
   show() {
     const { contentEl } = this;
     contentEl.show();
-    this.parent().active();
+    // this.parent().active();
     bindClickoutside(this.parent(), () => {
       this.hide();
     });
+    return this;
+  }
+  parent() {
+    // throw new Error('Method not implemented.');
+    return this;
   }
 
   hide() {
-    this.parent().active(false);
+    // this.parent().active(false);
     this.contentEl.hide();
     unbindClickoutside(this.parent());
+    return this;
   }
 }

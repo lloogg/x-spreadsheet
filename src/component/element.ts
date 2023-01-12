@@ -1,6 +1,7 @@
 /* global document */
 /* global window */
 class Element {
+  el: HTMLElement;
   constructor(tag, className = '') {
     if (typeof tag === 'string') {
       this.el = document.createElement(tag);
@@ -8,7 +9,7 @@ class Element {
     } else {
       this.el = tag;
     }
-    this.data = {};
+    // this.data = {};
   }
 
   data(key, value) {
@@ -22,7 +23,10 @@ class Element {
   on(eventNames, handler) {
     const [fen, ...oen] = eventNames.split('.');
     let eventName = fen;
-    if (eventName === 'mousewheel' && /Firefox/i.test(window.navigator.userAgent)) {
+    if (
+      eventName === 'mousewheel' &&
+      /Firefox/i.test(window.navigator.userAgent)
+    ) {
       eventName = 'DOMMouseScroll';
     }
     this.el.addEventListener(eventName, (evt) => {
@@ -50,9 +54,7 @@ class Element {
       });
       return this;
     }
-    const {
-      offsetTop, offsetLeft, offsetHeight, offsetWidth,
-    } = this.el;
+    const { offsetTop, offsetLeft, offsetHeight, offsetWidth } = this.el;
     return {
       top: offsetTop,
       left: offsetLeft,
@@ -86,7 +88,7 @@ class Element {
     if (arguments.length === 0) {
       return this.el.childNodes;
     }
-    eles.forEach(ele => this.child(ele));
+    eles.forEach((ele) => this.child(ele));
     return this;
   }
 
@@ -191,6 +193,9 @@ class Element {
   // key, value
   // key
   // {k, v}...
+  attr(key: string, value: number): this;
+  attr(key: string, value: any): this;
+  attr(key: string, value: null): string;
   attr(key, value) {
     if (value !== undefined) {
       this.el.setAttribute(key, value);
@@ -219,11 +224,12 @@ class Element {
   }
 
   val(v) {
+    const el = this.el as HTMLInputElement;
     if (v !== undefined) {
-      this.el.value = v;
+      el.value = v;
       return this;
     }
-    return this.el.value;
+    return el.value;
   }
 
   focus() {
@@ -231,14 +237,17 @@ class Element {
   }
 
   cssRemoveKeys(...keys) {
-    keys.forEach(k => this.el.style.removeProperty(k));
+    keys.forEach((k) => this.el.style.removeProperty(k));
     return this;
   }
 
   // css( propertyName )
   // css( propertyName, value )
   // css( properties )
-  css(name, value) {
+  css(name: string): string;
+  css(name: Exclude<string, any>): this;
+  css(name: string, value: string): this;
+  css(name, value?) {
     if (value === undefined && typeof name !== 'string') {
       Object.keys(name).forEach((k) => {
         this.el.style[k] = name[k];
@@ -269,7 +278,4 @@ class Element {
 
 const h = (tag, className = '') => new Element(tag, className);
 
-export {
-  Element,
-  h,
-};
+export { Element, h };

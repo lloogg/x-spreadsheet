@@ -64,6 +64,7 @@ function toggleChange(type) {
 }
 
 class DropdownMore extends Dropdown {
+  moreBtns: any;
   constructor() {
     const icon = new Icon('ellipsis');
     const moreBtns = h('div', `${cssPrefix}-toolbar-more`);
@@ -113,6 +114,35 @@ function moreResize() {
 }
 
 export default class Toolbar {
+  data: any;
+  change: (value?: string) => void;
+  widthFn: any;
+  ddFormat: any;
+  ddFont: any;
+  ddFormula: any;
+  ddFontSize: any;
+  ddTextColor: any;
+  ddFillColor: any;
+  ddAlign: any;
+  ddVAlign: any;
+  ddBorder: any;
+  ddMore: DropdownMore;
+  btnChildren: any[];
+  undoEl: any;
+  redoEl: any;
+  paintformatEl: any;
+  clearformatEl: any;
+  fontBoldEl: any;
+  fontItalicEl: any;
+  underlineEl: any;
+  strikeEl: any;
+  mergeEl: any;
+  textwrapEl: any;
+  freezeEl: any;
+  autofilterEl: any;
+  moreEl: any;
+  el: any;
+  btns: any;
   constructor(data, widthFn, isHide = false) {
     this.data = data;
     this.change = () => {};

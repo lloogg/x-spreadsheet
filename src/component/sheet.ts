@@ -886,6 +886,24 @@ function sheetInitEvents() {
 }
 
 export default class Sheet {
+  eventMap: any;
+  el: any;
+  toolbar: any;
+  print: any;
+  data: any;
+  tableEl: any;
+  rowResizer: any;
+  colResizer: any;
+  verticalScrollbar: any;
+  horizontalScrollbar: any;
+  editor: any;
+  modalValidation: any;
+  contextMenu: any;
+  selector: any;
+  overlayerCEl: any;
+  overlayerEl: any;
+  sortFilter: any;
+  table: any;
   constructor(targetEl, data) {
     this.eventMap = createEventEmitter();
     const { view, showToolbar, showContextmenu } = data.settings;
