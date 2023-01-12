@@ -37,7 +37,7 @@ function translate(key, messages) {
   return undefined;
 }
 
-function t(key) {
+function t(key, ...args) {
   let v = translate(key, $messages);
   if (!v && window && window.x_spreadsheet && window.x_spreadsheet.$messages) {
     v = translate(key, window.x_spreadsheet.$messages);

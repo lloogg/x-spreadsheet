@@ -1,8 +1,11 @@
 /* global document */
 /* global window */
-class Element {
-  el: HTMLElement;
-  constructor(tag, className = '') {
+type ElementType = keyof HTMLElementTagNameMap;
+
+class Element<K extends keyof HTMLElementTagNameMap> {
+  el: HTMLElementTagNameMap[K];
+
+  constructor(tag: K | HTMLElementTagNameMap[K], className = '') {
     if (typeof tag === 'string') {
       this.el = document.createElement(tag);
       this.el.className = className;
@@ -33,10 +36,10 @@ class Element {
       handler(evt);
       for (let i = 0; i < oen.length; i += 1) {
         const k = oen[i];
-        if (k === 'left' && evt.button !== 0) {
+        if (k === 'left' && evt instanceof MouseEvent && evt.button !== 0) {
           return;
         }
-        if (k === 'right' && evt.button !== 2) {
+        if (k === 'right' && evt instanceof MouseEvent && evt.button !== 2) {
           return;
         }
         if (k === 'stop') {
@@ -47,7 +50,9 @@ class Element {
     return this;
   }
 
-  offset(value) {
+  offset();
+  offset(value);
+  offset(value?) {
     if (value !== undefined) {
       Object.keys(value).forEach((k) => {
         this.css(k, `${value[k]}px`);
@@ -63,7 +68,7 @@ class Element {
     };
   }
 
-  scroll(v) {
+  scroll(v?) {
     const { el } = this;
     if (v !== undefined) {
       if (v.left !== undefined) {
@@ -80,13 +85,16 @@ class Element {
     return this.el.getBoundingClientRect();
   }
 
-  parent() {
-    return new Element(this.el.parentNode);
+  parent(): Element<ElementType> | void {
+    const parent = this.el.parentElement as HTMLElementTagNameMap[ElementType];
+    return new Element(parent);
   }
 
+  children(): HTMLElementTagNameMap[ElementType][];
+  children(...eles: Element<ElementType>[] | string[]): this;
   children(...eles) {
     if (arguments.length === 0) {
-      return this.el.childNodes;
+      return Array.from(this.el.children);
     }
     eles.forEach((ele) => this.child(ele));
     return this;
@@ -128,12 +136,14 @@ class Element {
   }
   */
 
-  child(arg) {
-    let ele = arg;
+  child(arg: string | Element<ElementType> | HTMLElement) {
+    let ele: Text | HTMLElement;
     if (typeof arg === 'string') {
       ele = document.createTextNode(arg);
     } else if (arg instanceof Element) {
       ele = arg.el;
+    } else {
+      ele = arg;
     }
     this.el.appendChild(ele);
     return this;
@@ -215,7 +225,9 @@ class Element {
     return this;
   }
 
-  html(content) {
+  html(): string;
+  html(content: string): this;
+  html(content?: string) {
     if (content !== undefined) {
       this.el.innerHTML = content;
       return this;
@@ -223,7 +235,9 @@ class Element {
     return this.el.innerHTML;
   }
 
-  val(v) {
+  val(): string;
+  val(v: string): this;
+  val(v?) {
     const el = this.el as HTMLInputElement;
     if (v !== undefined) {
       el.value = v;
@@ -276,6 +290,7 @@ class Element {
   }
 }
 
-const h = (tag, className = '') => new Element(tag, className);
+const h = <K extends keyof HTMLElementTagNameMap>(tag: K | HTMLElementTagNameMap[K], className = '') =>
+  new Element(tag, className);
 
 export { Element, h };
