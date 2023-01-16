@@ -9,13 +9,7 @@ export default class Dropdown extends Element<'div'> {
   contentEl: any;
   headerEl: any;
   change: (it: any) => void;
-  constructor(
-    title,
-    width,
-    showArrow,
-    placement,
-    ...children
-  ) {
+  constructor(title, width, showArrow, placement, ...children) {
     super('div', `${cssPrefix}-dropdown ${placement}`);
     this.title = title;
     // this.change = () => {};
@@ -48,6 +42,7 @@ export default class Dropdown extends Element<'div'> {
             )
           : '',
       );
+    this.children(this.headerEl, this.contentEl);
   }
   setContentChildren(...children) {
     this.contentEl.html('');

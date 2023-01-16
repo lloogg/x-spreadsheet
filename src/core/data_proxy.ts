@@ -866,11 +866,11 @@ export default class DataProxy {
     if (sort) {
       fary.sort((a, b) => {
         if (sort.order === 'asc') {
-          return a - b
-        };
+          return a - b;
+        }
         if (sort.order === 'desc') {
-          return b - a
-        };
+          return b - a;
+        }
         return 0;
       });
     }

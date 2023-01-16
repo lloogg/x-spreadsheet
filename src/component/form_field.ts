@@ -9,22 +9,27 @@ const patterns = {
 
 // rule: { required: false, type, pattern: // }
 export default class FormField {
-  label: string | Element<"label">;
+  label: string | Element<'label'>;
   rule: any;
-  tip: Element<"div">;
+  tip: Element<'div'>;
   input: any;
-  el: Element<"div">;
+  el: Element<'div'>;
   constructor(input, rule, label?, labelWidth?) {
     this.label = '';
     this.rule = rule;
     if (label) {
-      this.label = h('label', 'label').css('width', `${labelWidth}px`).html(label);
+      this.label = h('label', 'label')
+        .css('width', `${labelWidth}px`)
+        .html(label);
     }
     this.tip = h('div', 'tip').child('tip').hide();
     this.input = input;
     this.input.vchange = () => this.validate();
-    this.el = h('div', `${cssPrefix}-form-field`)
-      .children(this.label, input.el, this.tip);
+    this.el = h('div', `${cssPrefix}-form-field`).children(
+      this.label,
+      input.el,
+      this.tip,
+    );
   }
 
   isShow() {
@@ -40,7 +45,6 @@ export default class FormField {
     return this;
   }
 
-  
   val(v?) {
     return this.input.val(v);
   }
@@ -50,9 +54,7 @@ export default class FormField {
   }
 
   validate() {
-    const {
-      input, rule, tip, el,
-    } = this;
+    const { input, rule, tip, el } = this;
     const v = input.val();
     if (rule.required) {
       if (/^\s*$/.test(v)) {

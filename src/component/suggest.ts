@@ -70,7 +70,7 @@ function inputKeydownHandler(evt) {
 export default class Suggest {
   filterItems: any[];
   items: any;
-  el: Element<"div">;
+  el: Element<'div'>;
   itemClick: any;
   itemIndex: number;
   constructor(items, itemClick, width = '200px') {
@@ -82,8 +82,7 @@ export default class Suggest {
   }
 
   setOffset(v) {
-    this.el.cssRemoveKeys('top', 'bottom')
-      .offset(v);
+    this.el.cssRemoveKeys('top', 'bottom').offset(v);
   }
 
   hide() {
@@ -102,7 +101,9 @@ export default class Suggest {
   search(word) {
     let { items } = this;
     if (!/^\s*$/.test(word)) {
-      items = items.filter(it => (it.key || it).startsWith(word.toUpperCase()));
+      items = items.filter((it) =>
+        (it.key || it).startsWith(word.toUpperCase()),
+      );
     }
     items = items.map((it) => {
       let { title } = it;
@@ -130,11 +131,15 @@ export default class Suggest {
     }
     const { el } = this;
     // items[0].toggle();
-    el.html('').children(...items).show();
-    bindClickoutside(el.parent(), () => { this.hide(); });
+    el.html('')
+      .children(...items)
+      .show();
+    bindClickoutside(el.parent(), () => {
+      this.hide();
+    });
   }
 
   bindInputEvents(input) {
-    input.on('keydown', evt => inputKeydownHandler.call(this, evt));
+    input.on('keydown', (evt) => inputKeydownHandler.call(this, evt));
   }
 }

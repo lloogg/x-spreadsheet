@@ -290,7 +290,9 @@ class Element<K extends keyof HTMLElementTagNameMap> {
   }
 }
 
-const h = <K extends keyof HTMLElementTagNameMap>(tag: K | HTMLElementTagNameMap[K], className = '') =>
-  new Element(tag, className);
+const h = <K extends keyof HTMLElementTagNameMap>(
+  tag: K | HTMLElementTagNameMap[K],
+  className = '',
+) => new Element(tag, className);
 
 export { Element, h };

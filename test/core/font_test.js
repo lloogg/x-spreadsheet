@@ -44,18 +44,24 @@ describe('getFontSizePxByPt()', () => {
 
 describe('fonts()', () => {
   const fontItem = baseFonts[0];
-  it(`should include { ${fontItem.key}: ${JSON.stringify(fontItem)} } when the value is not provide.`, () => {
+  it(`should include { ${fontItem.key}: ${JSON.stringify(
+    fontItem,
+  )} } when the value is not provide.`, () => {
     const f = fonts();
     assert.equal(f[fontItem.key], fontItem);
   });
 
   /** @type {BaseFont} */
-  const appendItem = [{
-    key: 'test',
-    title: 'test title',
-  }];
+  const appendItem = [
+    {
+      key: 'test',
+      title: 'test title',
+    },
+  ];
   const appendItems = [appendItem];
-  it(`should include { ${appendItems[0].key}: ${JSON.stringify(appendItems[0])} } when the value is ${JSON.stringify(appendItems)}`, () => {
+  it(`should include { ${appendItems[0].key}: ${JSON.stringify(
+    appendItems[0],
+  )} } when the value is ${JSON.stringify(appendItems)}`, () => {
     const f = fonts(appendItems);
     assert.equal(f[appendItem.key], appendItem);
   });

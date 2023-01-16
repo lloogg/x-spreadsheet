@@ -3,7 +3,7 @@ declare module 'x-data-spreadsheet' {
     tip?: string;
     el?: HTMLElement;
     icon?: string;
-    onClick?: (data: object, sheet: object) => void
+    onClick?: (data: object, sheet: object) => void;
   }
   export interface Options {
     mode?: 'edit' | 'read';
@@ -12,8 +12,8 @@ declare module 'x-data-spreadsheet' {
     showContextmenu?: boolean;
     showBottomBar?: boolean;
     extendToolbar?: {
-      left?: ExtendToolbarOption[],
-      right?: ExtendToolbarOption[],
+      left?: ExtendToolbarOption[];
+      right?: ExtendToolbarOption[];
     };
     autoFocus?: boolean;
     view?: {
@@ -56,18 +56,18 @@ declare module 'x-data-spreadsheet' {
   export interface SpreadsheetEventHandler {
     (
       envt: CELL_SELECTED,
-      callback: (cell: Cell, rowIndex: number, colIndex: number) => void
+      callback: (cell: Cell, rowIndex: number, colIndex: number) => void,
     ): void;
     (
       envt: CELLS_SELECTED,
       callback: (
         cell: Cell,
-        parameters: { sri: number; sci: number; eri: number; eci: number }
-      ) => void
+        parameters: { sri: number; sci: number; eri: number; eci: number },
+      ) => void,
     ): void;
     (
       evnt: CELL_EDITED,
-      callback: (text: string, rowIndex: number, colIndex: number) => void
+      callback: (text: string, rowIndex: number, colIndex: number) => void,
     ): void;
   }
 
@@ -89,7 +89,7 @@ declare module 'x-data-spreadsheet' {
   export interface RowData {
     cells: {
       [key: number]: CellData;
-    }
+    };
   }
 
   /**
@@ -105,7 +105,7 @@ declare module 'x-data-spreadsheet' {
       [key: number]: ColProperties;
     };
     rows?: {
-      [key: number]: RowData
+      [key: number]: RowData;
     };
   }
 
@@ -121,7 +121,7 @@ declare module 'x-data-spreadsheet' {
     valign?: 'top' | 'middle' | 'bottom';
     font?: {
       bold?: boolean;
-    }
+    };
     bgcolor?: string;
     textwrap?: boolean;
     color?: string;
@@ -159,7 +159,7 @@ declare module 'x-data-spreadsheet' {
     cellStyle(
       rowIndex: number,
       colIndex: number,
-      sheetIndex: number
+      sheetIndex: number,
     ): CellStyle;
     /**
      * get/set cell text
@@ -172,7 +172,7 @@ declare module 'x-data-spreadsheet' {
       rowIndex: number,
       colIndex: number,
       text: string,
-      sheetIndex?: number
+      sheetIndex?: number,
     ): this;
     /**
      * remove current sheet
@@ -202,8 +202,10 @@ declare module 'x-data-spreadsheet' {
   }
   global {
     interface Window {
-      x_spreadsheet(container: string | HTMLElement, opts?: Options): Spreadsheet; 
+      x_spreadsheet(
+        container: string | HTMLElement,
+        opts?: Options,
+      ): Spreadsheet;
     }
   }
 }
-

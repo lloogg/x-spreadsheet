@@ -183,7 +183,7 @@ export default class Toolbar {
   }
 
   moreResize() {
-    const { el, btns, moreEl , btns2 } = this;
+    const { el, btns, moreEl, btns2 } = this;
     const { moreBtns, contentEl } = (moreEl as any).dd;
     el.css('width', `${this.widthFn()}px`);
     const elBox = el.box();

@@ -167,10 +167,10 @@ export default class Editor {
   formulas: any;
   suggest: Suggest;
   datepicker: any;
-  areaEl: Element<"div">;
-  textEl: Element<"textarea">;
-  textlineEl: Element<"div">;
-  el: Element<"div">;
+  areaEl: Element<'div'>;
+  textEl: Element<'textarea'>;
+  textlineEl: Element<'div'>;
+  el: Element<'div'>;
   areaOffset: any;
   freeze: { w: number; h: number };
   cell: any;

@@ -6,9 +6,9 @@ export default class FormSelect {
   key: any;
   getTitle: (it: any) => any;
   vchange: (key?) => void;
-  el: Element<"div">;
+  el: Element<'div'>;
   suggest: Suggest;
-  itemEl: Element<"div">;
+  itemEl: Element<'div'>;
   constructor(key, items, width, getTitle = (it) => it, change = (key?) => {}) {
     this.key = key;
     this.getTitle = getTitle;

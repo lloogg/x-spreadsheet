@@ -19,6 +19,6 @@ module.exports = {
   devServer: {
     host: 'localhost',
     static: '../dist',
-    host: '0.0.0.0'
+    host: '0.0.0.0',
   },
 };

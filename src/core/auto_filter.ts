@@ -73,7 +73,9 @@ export default class AutoFilter {
   setData({ ref, filters, sort }) {
     if (ref != null) {
       this.ref = ref;
-      this.filters = filters.map(it => new Filter(it.ci, it.operator, it.value));
+      this.filters = filters.map(
+        (it) => new Filter(it.ci, it.operator, it.value),
+      );
       if (sort) {
         this.sort = new Sort(sort.ci, sort.order);
       }
@@ -83,7 +85,7 @@ export default class AutoFilter {
   getData() {
     if (this.active()) {
       const { ref, filters, sort } = this;
-      return { ref, filters: filters.map(it => it.getData()), sort };
+      return { ref, filters: filters.map((it) => it.getData()), sort };
     }
     return {};
   }
