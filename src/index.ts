@@ -17,6 +17,7 @@ export type DefaultSettings = typeof defaultSettings & {
     left?: ExtendToolbarOption[];
     right?: ExtendToolbarOption[];
   };
+  mode: 'edit' | 'read';
 };
 
 export class Spreadsheet {
